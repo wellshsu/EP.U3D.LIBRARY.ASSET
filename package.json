@@ -2,7 +2,7 @@
   "name": "ep.u3d.library.asset",
   "displayName": "EP.U3D.LIBRARY.ASSET",
   "description": "Asset module.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "unity": "2019.2",
   "unityRelease": "0a12",
   "relatedPackages": {},
@@ -17,5 +17,8 @@
     "email": "wellshsu@outlook.com",
     "url": "https://github.com/wellshsu"
   },
-  "type": "library"
+  "type": "library",
+  "dependencies": {
+    "ep.u3d.library.base": "0.0.1"
+  }
 }
