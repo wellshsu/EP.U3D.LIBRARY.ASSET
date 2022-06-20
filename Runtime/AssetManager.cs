@@ -833,7 +833,6 @@ namespace EP.U3D.LIBRARY.ASSET
                 item.Value.Bundle.Unload(true);
             }
             LoadedBundles.Clear();
-            Helper.ReleaseMemory(true, true, true);
         }
 
         /// <summary>
