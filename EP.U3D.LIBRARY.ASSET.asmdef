@@ -1,0 +1,16 @@
+{
+    "name": "EP.U3D.LIBRARY.ASSET",
+    "rootNamespace": "",
+    "references": [
+        "EP.U3D.LIBRARY.BASE"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
