@@ -174,10 +174,10 @@ namespace EP.U3D.LIBRARY.ASSET
         #endregion
 
         #region initialize | 初始化
-        public static event Action BeforeLoadAsset;
-        public static event Action AfterLoadAsset;
-        public static event Action BeforeLoadScene;
-        public static event Action AfterLoadScene;
+        public static event Action<string> BeforeLoadAsset;
+        public static event Action<string> AfterLoadAsset;
+        public static event Action<string> BeforeLoadScene;
+        public static event Action<string> AfterLoadScene;
 
         /// <summary>
         /// 初始化（加载AB的manifest）
@@ -431,7 +431,7 @@ namespace EP.U3D.LIBRARY.ASSET
         /// <returns></returns>
         public static UnityEngine.Object LoadAsset(string assetPath, Type type, bool _internal = false)
         {
-            BeforeLoadAsset?.Invoke();
+            BeforeLoadAsset?.Invoke(assetPath);
             UnityEngine.Object asset = null;
             try
             {
@@ -487,7 +487,7 @@ namespace EP.U3D.LIBRARY.ASSET
             }
             finally
             {
-                AfterLoadAsset?.Invoke();
+                AfterLoadAsset?.Invoke(assetPath);
             }
             return asset;
         }
@@ -503,7 +503,7 @@ namespace EP.U3D.LIBRARY.ASSET
         /// <returns></returns>
         private static IEnumerator DoLoadAsset(string assetPath, Type type, Callback cb, Handler handler, bool _internal = false)
         {
-            BeforeLoadAsset?.Invoke();
+            BeforeLoadAsset?.Invoke(assetPath);
             UnityEngine.Object asset = null;
             if (_internal)
             {
@@ -600,7 +600,7 @@ namespace EP.U3D.LIBRARY.ASSET
                     Helper.LogError("load {0} error", bundleName);
                 }
             }
-            AfterLoadAsset?.Invoke();
+            AfterLoadAsset?.Invoke(assetPath);
             cb?.Invoke(asset);
             yield return 0;
         }
@@ -645,7 +645,7 @@ namespace EP.U3D.LIBRARY.ASSET
         /// <returns></returns>
         public static void LoadScene(string sceneName)
         {
-            BeforeLoadScene?.Invoke();
+            BeforeLoadScene?.Invoke(sceneName);
             try
             {
                 if (Constants.ASSET_BUNDLE_MODE)
@@ -672,7 +672,7 @@ namespace EP.U3D.LIBRARY.ASSET
             }
             finally
             {
-                AfterLoadScene?.Invoke();
+                AfterLoadScene?.Invoke(sceneName);
             }
         }
 
@@ -684,8 +684,7 @@ namespace EP.U3D.LIBRARY.ASSET
         /// <returns></returns>
         private static IEnumerator DoLoadScene(string sceneName, Handler handler)
         {
-            BeforeLoadScene?.Invoke();
-            yield return 0; // 等一帧， 等事件注册完。
+            BeforeLoadScene?.Invoke(sceneName);
             if (Constants.ASSET_BUNDLE_MODE)
             {
                 handler.TotalCount++;// Load任务
@@ -740,7 +739,7 @@ namespace EP.U3D.LIBRARY.ASSET
                     handler.DoAfterLoad();
                 }
             }
-            AfterLoadScene?.Invoke();
+            AfterLoadScene?.Invoke(sceneName);
             yield return 0;
         }
 
